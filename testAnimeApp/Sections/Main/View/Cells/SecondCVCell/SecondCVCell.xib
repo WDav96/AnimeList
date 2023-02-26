@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="secondCell" id="gTV-IL-0wX" customClass="SecondCVCell" customModule="testAnimeApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="326" height="195"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="326" height="195"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZzU-OI-2Qi">
+                        <rect key="frame" x="5" y="5.3333333333333286" width="120" height="179.66666666666669"/>
+                        <color key="tintColor" name="mainBlueColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="LGm-c0-IAv"/>
+                            <constraint firstAttribute="width" constant="120" id="y6i-OW-D3q"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8V1-TT-fHh">
+                        <rect key="frame" x="145" y="15" width="65" height="18"/>
+                        <color key="backgroundColor" name="mainBlueColor"/>
+                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnC-qn-Dzo">
+                        <rect key="frame" x="145" y="53" width="161" height="20.333333333333329"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="18"/>
+                        <color key="textColor" name="mainBlueColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWa-TD-8ej">
+                        <rect key="frame" x="145" y="103.33333333333333" width="43.666666666666657" height="13.666666666666671"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="12"/>
+                        <color key="textColor" name="mainBlueColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mjW-i5-Ih9">
+                        <rect key="frame" x="260.33333333333331" y="171.33333333333334" width="45.666666666666686" height="13.666666666666657"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="Arial-ItalicMT" family="Arial" pointSize="12"/>
+                        <color key="textColor" name="mainBlueColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0J8-sU-0GY">
+                        <rect key="frame" x="230.33333333333334" y="166.66666666666666" width="25" height="23.666666666666657"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Djr-WR-UqB"/>
+                            <constraint firstAttribute="width" constant="25" id="nDD-65-42X"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="CWa-TD-8ej" firstAttribute="leading" secondItem="ZzU-OI-2Qi" secondAttribute="trailing" constant="20" id="Az8-bg-BM4"/>
+                <constraint firstItem="ZzU-OI-2Qi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Bdz-lD-mvw"/>
+                <constraint firstItem="CWa-TD-8ej" firstAttribute="top" secondItem="dnC-qn-Dzo" secondAttribute="bottom" constant="30" id="DMM-wj-2kk"/>
+                <constraint firstAttribute="trailing" secondItem="mjW-i5-Ih9" secondAttribute="trailing" constant="20" id="DUx-Am-cMe"/>
+                <constraint firstItem="8V1-TT-fHh" firstAttribute="leading" secondItem="ZzU-OI-2Qi" secondAttribute="trailing" constant="20" id="Ggo-kp-Dtw"/>
+                <constraint firstItem="ZzU-OI-2Qi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="LMn-LE-ijh"/>
+                <constraint firstAttribute="bottom" secondItem="mjW-i5-Ih9" secondAttribute="bottom" constant="10" id="Swz-uB-1aM"/>
+                <constraint firstItem="0J8-sU-0GY" firstAttribute="centerY" secondItem="mjW-i5-Ih9" secondAttribute="centerY" id="WNa-7d-9kS"/>
+                <constraint firstItem="8V1-TT-fHh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="gdr-ts-q04"/>
+                <constraint firstAttribute="trailing" secondItem="dnC-qn-Dzo" secondAttribute="trailing" constant="20" id="ldR-HO-00l"/>
+                <constraint firstItem="0J8-sU-0GY" firstAttribute="trailing" secondItem="mjW-i5-Ih9" secondAttribute="leading" constant="-5" id="mNh-xY-YDo"/>
+                <constraint firstItem="dnC-qn-Dzo" firstAttribute="leading" secondItem="ZzU-OI-2Qi" secondAttribute="trailing" constant="20" id="nx1-1B-eFF"/>
+                <constraint firstItem="dnC-qn-Dzo" firstAttribute="top" secondItem="8V1-TT-fHh" secondAttribute="bottom" constant="20" id="vv2-lb-qii"/>
+            </constraints>
+            <size key="customSize" width="326" height="195"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                    <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="animeImage" destination="ZzU-OI-2Qi" id="FvB-S8-FSC"/>
+                <outlet property="categoryLabel" destination="8V1-TT-fHh" id="pVP-fi-1nS"/>
+                <outlet property="durationLabel" destination="mjW-i5-Ih9" id="WEy-d1-gXs"/>
+                <outlet property="episodeLabel" destination="CWa-TD-8ej" id="EKb-W3-r2M"/>
+                <outlet property="nameLabel" destination="dnC-qn-Dzo" id="Cz2-eR-GEE"/>
+            </connections>
+            <point key="canvasLocation" x="169.46564885496181" y="39.7887323943662"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="clock" catalog="system" width="128" height="123"/>
+        <image name="doc.fill" catalog="system" width="115" height="128"/>
+        <namedColor name="mainBlueColor">
+            <color red="0.25900000333786011" green="0.46799999475479126" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
