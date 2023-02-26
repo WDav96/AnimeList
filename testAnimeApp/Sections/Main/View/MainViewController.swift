@@ -11,9 +11,11 @@ class MainViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var firstCV: UICollectionView!
-    @IBOutlet weak var secondCV: UICollectionView!
+    @IBOutlet private weak var firstCV: UICollectionView!
+    @IBOutlet private weak var secondCV: UICollectionView!
     @IBOutlet private var loadingView: UIActivityIndicatorView!
+    @IBOutlet private var discoverLabel: UILabel!
+    @IBOutlet private var sortedLabel: UILabel!
     
     
     // MARK: - Properties
@@ -72,10 +74,8 @@ class MainViewController: UIViewController {
         case .isLoading(let isLoading):
             if isLoading {
                 print("Loading spinner...")
-                loadingView.startAnimating()
             } else {
                 print("Remove spinner...")
-                loadingView.startAnimating()
             }
         case .didGetData:
             reloadCollectionsView()
@@ -98,15 +98,18 @@ class MainViewController: UIViewController {
     }
     
     private func reloadCollectionsView() {
-        
         let scoredAnimes = viewModel!.animesDescription.sorted(by: { $0.score! > $1.score! })
-        
-        print(scoredAnimes)
         bestAnimes = viewModel!.bestAnimes
         animesDescription = scoredAnimes
         firstCV.reloadData()
         secondCV.reloadData()
         loadingView.stopAnimating()
+        showLabels()
+    }
+    
+    private func showLabels() {
+        discoverLabel.isHidden = false
+        sortedLabel.isHidden = false
     }
 
 }
