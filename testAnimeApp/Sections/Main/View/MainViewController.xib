@@ -12,9 +12,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="testAnimeApp" customModuleProvider="target">
             <connections>
+                <outlet property="discoverLabel" destination="zYf-P4-7gf" id="x3z-IG-FtV"/>
+                <outlet property="errorMessageLabel" destination="AsW-YK-bIv" id="heO-OU-as1"/>
                 <outlet property="firstCV" destination="cLQ-Gl-XZx" id="X4p-mO-o5t"/>
-                <outlet property="loadingView" destination="Qux-WP-Blg" id="ZYO-3J-e7h"/>
+                <outlet property="loadingView" destination="jep-zT-W6q" id="UvS-4D-7Vr"/>
+                <outlet property="searchTextField" destination="lEl-uV-6Bg" id="Neh-vW-jbe"/>
                 <outlet property="secondCV" destination="A8A-e4-AQk" id="rPm-O3-zn2"/>
+                <outlet property="sortedLabel" destination="fjS-HO-Hua" id="rL7-fR-Q8t"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,11 +27,17 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Qux-WP-Blg">
-                    <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
-                </activityIndicatorView>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search anime by name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lEl-uV-6Bg">
+                    <rect key="frame" x="20" y="69" width="353" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="pl2-f4-afy"/>
+                    </constraints>
+                    <color key="textColor" name="mainBlueColor"/>
+                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cLQ-Gl-XZx">
-                    <rect key="frame" x="15" y="69" width="363" height="200"/>
+                    <rect key="frame" x="15" y="114" width="363" height="200"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="VSd-Vf-BjP"/>
@@ -40,20 +50,29 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-P4-7gf">
-                    <rect key="frame" x="20" y="289" width="127" height="33.666666666666686"/>
-                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="30"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results Found. Try rephrasing your search." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsW-YK-bIv">
+                    <rect key="frame" x="106.66666666666669" y="197.33333333333334" width="180" height="33.666666666666657"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="DJ5-5s-KSj"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="15"/>
+                    <color key="textColor" systemColor="systemPinkColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-P4-7gf">
+                    <rect key="frame" x="20.000000000000007" y="334" width="105.66666666666669" height="28"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
                     <color key="textColor" name="mainBlueColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorted by fan score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjS-HO-Hua">
-                    <rect key="frame" x="20" y="332.66666666666669" width="156.33333333333334" height="21"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorted by fan score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjS-HO-Hua">
+                    <rect key="frame" x="20" y="372" width="156.33333333333334" height="21"/>
                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
                     <color key="textColor" name="mainBlueColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="A8A-e4-AQk">
-                    <rect key="frame" x="15" y="373.66666666666674" width="363" height="424.33333333333326"/>
+                    <rect key="frame" x="15" y="413" width="363" height="385"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="QAb-zb-c5R"/>
@@ -65,6 +84,10 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="jep-zT-W6q">
+                    <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                    <color key="color" name="mainBlueColor"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,15 +95,20 @@
                 <constraint firstItem="A8A-e4-AQk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="17i-e5-mYl"/>
                 <constraint firstItem="zYf-P4-7gf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="2l1-a1-HiU"/>
                 <constraint firstItem="fjS-HO-Hua" firstAttribute="leading" secondItem="zYf-P4-7gf" secondAttribute="leading" id="5SZ-cb-4xI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lEl-uV-6Bg" secondAttribute="trailing" constant="20" id="AWh-3b-TIf"/>
+                <constraint firstItem="cLQ-Gl-XZx" firstAttribute="top" secondItem="lEl-uV-6Bg" secondAttribute="bottom" id="EnL-bS-dgO"/>
+                <constraint firstItem="AsW-YK-bIv" firstAttribute="centerY" secondItem="cLQ-Gl-XZx" secondAttribute="centerY" id="If2-Qx-aA4"/>
                 <constraint firstItem="fjS-HO-Hua" firstAttribute="top" secondItem="zYf-P4-7gf" secondAttribute="bottom" constant="10" id="Jf4-tZ-ZL4"/>
+                <constraint firstItem="AsW-YK-bIv" firstAttribute="centerX" secondItem="cLQ-Gl-XZx" secondAttribute="centerX" id="MIQ-LO-r0i"/>
+                <constraint firstItem="jep-zT-W6q" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PER-Zj-JqM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="A8A-e4-AQk" secondAttribute="trailing" constant="15" id="Vkn-5H-GTe"/>
-                <constraint firstItem="Qux-WP-Blg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Z8R-BC-Uvp"/>
                 <constraint firstItem="cLQ-Gl-XZx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Zpr-22-eX9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="A8A-e4-AQk" secondAttribute="bottom" constant="20" id="cVh-5B-Z4M"/>
+                <constraint firstItem="lEl-uV-6Bg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="en3-lK-P9x"/>
                 <constraint firstItem="zYf-P4-7gf" firstAttribute="top" secondItem="cLQ-Gl-XZx" secondAttribute="bottom" constant="20" id="gRH-tP-a5X"/>
-                <constraint firstItem="Qux-WP-Blg" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ikg-Wy-NfQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cLQ-Gl-XZx" secondAttribute="trailing" constant="15" id="j0y-9e-haR"/>
-                <constraint firstItem="cLQ-Gl-XZx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="jPn-tw-fqV"/>
+                <constraint firstItem="jep-zT-W6q" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="lbE-Hw-UiH"/>
+                <constraint firstItem="lEl-uV-6Bg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="sGm-fh-pgm"/>
                 <constraint firstItem="A8A-e4-AQk" firstAttribute="top" secondItem="fjS-HO-Hua" secondAttribute="bottom" constant="20" id="uhK-RI-Gth"/>
             </constraints>
             <point key="canvasLocation" x="131" y="-11"/>
@@ -92,6 +120,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - IBOutlets
     
@@ -16,6 +16,8 @@ class MainViewController: UIViewController {
     @IBOutlet private var loadingView: UIActivityIndicatorView!
     @IBOutlet private var discoverLabel: UILabel!
     @IBOutlet private var sortedLabel: UILabel!
+    @IBOutlet private weak var searchTextField: UITextField!
+    @IBOutlet private weak var errorMessageLabel: UILabel!
     
     
     // MARK: - Properties
@@ -45,12 +47,47 @@ class MainViewController: UIViewController {
 
     }
     
+    // MARK: - Override Methods
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches,
+                           with: event)
+        self.view.endEditing(true)
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { _ in
+            guard let text = textField.text else { return }
+            
+            if text == "" {
+                self.bestAnimes = self.viewModel!.bestAnimes
+                self.firstCV.reloadData()
+                return
+            }
+            
+            self.bestAnimes = self.viewModel!.bestAnimes
+            
+            var filteredAnime: [AnimeDescription] = []
+            for i in self.bestAnimes {
+                if i.title!.lowercased().contains(text.lowercased()) {
+                    filteredAnime.append(i)
+                }
+            }
+            
+            self.bestAnimes = filteredAnime
+            self.firstCV.reloadData()
+            
+            self.errorMessageLabel.isHidden = filteredAnime.isEmpty ? false : true
+        }
+    }
+    
     // MARK: - Methods
     
     private func setupUI() {
         loadingView.hidesWhenStopped = true
         title = "Discover"
         setCollectionsView()
+        searchTextField.delegate = self
     }
     
     private func getBestAnimes() {
@@ -78,6 +115,7 @@ class MainViewController: UIViewController {
                 print("Remove spinner...")
             }
         case .didGetData:
+            bestAnimes = viewModel!.bestAnimes
             reloadCollectionsView()
         case .errorMessage(let error):
             print(error)
