@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITextFieldDelegate {
+class MainViewController: UIViewController {
     
     // MARK: - IBOutlets
     
@@ -22,20 +22,21 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
-    var viewModel: MainViewModel?
-    var router: MainRouter?
+    var viewModel: MainViewModel
+    var router: MainRouter
     
-    var bestAnimes: [AnimeDescription] = []
-    var animesDescription: [AnimeDescription] = []
+    lazy var adapter = MainAdapter(viewModel: viewModel, firstCV: firstCV)
     
-    // MARK: - Observable Properties
-    
-    var outputEvents: Observable<HomeViewModelOutput> {
-        mutableOutputEvents
+    init(viewModel: MainViewModel, router: MainRouter) {
+        self.viewModel = viewModel
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
     }
     
-    private let mutableOutputEvents = MutableObservable<HomeViewModelOutput>()
-
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Controller Methods
     
     override func viewDidLoad() {
@@ -55,32 +56,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { _ in
-            guard let text = textField.text else { return }
-            
-            if text == "" {
-                self.bestAnimes = self.viewModel!.bestAnimes
-                self.firstCV.reloadData()
-                return
-            }
-            
-            self.bestAnimes = self.viewModel!.bestAnimes
-            
-            var filteredAnime: [AnimeDescription] = []
-            for i in self.bestAnimes {
-                if i.title!.lowercased().contains(text.lowercased()) {
-                    filteredAnime.append(i)
-                }
-            }
-            
-            self.bestAnimes = filteredAnime
-            self.firstCV.reloadData()
-            
-            self.errorMessageLabel.isHidden = filteredAnime.isEmpty ? false : true
-        }
-    }
-    
     // MARK: - Methods
     
     private func setupUI() {
@@ -91,18 +66,19 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func getBestAnimes() {
-        loadingView.startAnimating()
-        viewModel?.getBestAnimes()
+        viewModel.getBestAnimes()
     }
     
     private func getAnimeDescription() {
-        loadingView.startAnimating()
-        viewModel?.getAnimesDescription()
+        viewModel.getAnimesDescription()
     }
     
     private func setupBindings() {
-        viewModel?.outputEvents.observe { [weak self] event in
+        viewModel.outputEvents.observe { [weak self] event in
             self?.validateEvents(event: event)
+        }
+        adapter.didSelectItemAt.observe { [unowned self] anime in
+            router.goToDescription(animeDescription: anime)
         }
     }
     
@@ -110,15 +86,19 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         switch event {
         case .isLoading(let isLoading):
             if isLoading {
-                print("Loading spinner...")
+                loadingView.startAnimating()
             } else {
-                print("Remove spinner...")
+                loadingView.stopAnimating()
             }
         case .didGetData:
-            bestAnimes = viewModel!.bestAnimes
             reloadCollectionsView()
         case .errorMessage(let error):
             print(error)
+            showAlert(title: "Error", message: "Has been ocurred fetching anime list.")
+        case .reloadFirstCV:
+            firstCV.reloadData()
+        case .topError(let showError):
+            errorMessageLabel.isHidden = showError
         }
     }
     
@@ -129,19 +109,16 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func setCollectionViewDelegates() {
-        firstCV.delegate = self
-        firstCV.dataSource = self
-        secondCV.delegate = self
-        secondCV.dataSource = self
+        firstCV.delegate = adapter
+        firstCV.dataSource = adapter
+        secondCV.delegate = adapter
+        secondCV.dataSource = adapter
     }
     
     private func reloadCollectionsView() {
-        let scoredAnimes = viewModel!.animesDescription.sorted(by: { $0.score! > $1.score! })
-        bestAnimes = viewModel!.bestAnimes
-        animesDescription = scoredAnimes
         firstCV.reloadData()
         secondCV.reloadData()
-        loadingView.stopAnimating()
+       
         showLabels()
     }
     
@@ -152,50 +129,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
 
 }
 
-extension MainViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        CGFloat(collectionView == firstCV ? bestAnimes.count : animesDescription.count)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        collectionView == firstCV ? CGSize(width: UIScreen.main.bounds.width / 3, height: view.bounds.height / 4) : CGSize(width: UIScreen.main.bounds.width, height: view.bounds.height / 4) 
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == firstCV {
-            router?.goToDescription(animeDescription: bestAnimes[indexPath.row])
-        } else if collectionView == secondCV {
-            router?.goToDescription(animeDescription: animesDescription[indexPath.row])
-        }
-    }
-    
-}
-
-extension MainViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        collectionView == firstCV ? bestAnimes.count : animesDescription.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == firstCV {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "firstCell", for: indexPath) as? FirstCVCell {
-                cell.bestAnime = bestAnimes[indexPath.row]
-                return cell
-            } else {
-                return UICollectionViewCell()
-            }
-        } else {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "secondCell", for: indexPath) as? SecondCVCell {
-                cell.animeDescription = animesDescription[indexPath.row]
-                return cell
-            } else {
-                return UICollectionViewCell()
-            }
-        }
+extension MainViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        viewModel.textFieldDidChangeSelection(text: textField.text)
     }
     
 }

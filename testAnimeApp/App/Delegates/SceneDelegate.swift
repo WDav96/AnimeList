@@ -55,7 +55,7 @@ private extension SceneDelegate {
     func setInitialController(to windowScene: UIWindowScene) {
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        let navigationController = UINavigationController(rootViewController: MainConfiguration.configure())
+        let navigationController = UINavigationController(rootViewController: MainFactory.configure())
         window?.rootViewController = navigationController
         return
     }

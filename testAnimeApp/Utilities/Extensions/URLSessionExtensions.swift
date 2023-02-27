@@ -16,26 +16,36 @@ extension URLSession {
     
     func request<T: Codable>(url: URL?, expecting: T.Type, completionHandler: @escaping (Result<T, Error>) -> Void ) {
         guard let url = url else {
-            completionHandler(.failure(CustomError.invalidData))
+            DispatchQueue.main.async {
+                completionHandler(.failure(CustomError.invalidData))
+            }
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
                 if let error = error {
-                    completionHandler(.failure(error))
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(error))
+                    }
                 } else {
-                    completionHandler(.failure(CustomError.invalidData))
+                    DispatchQueue.main.async {
+                        completionHandler(.failure(CustomError.invalidData))
+                    }
                 }
                 return
             }
             
             do {
                 let result = try JSONDecoder().decode(expecting, from: data)
-                completionHandler(.success(result))
+                DispatchQueue.main.async {
+                    completionHandler(.success(result))
+                }
             }
             catch {
-                completionHandler(.failure(error))
+                DispatchQueue.main.async {
+                    completionHandler(.failure(error))
+                }
             }
         }
         task.resume()

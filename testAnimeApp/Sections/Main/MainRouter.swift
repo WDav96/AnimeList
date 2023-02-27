@@ -11,11 +11,7 @@ class MainRouter {
     
     // MARK: - Properties
     
-    var view: MainViewController?
-    
-    init(view: MainViewController?) {
-        self.view = view
-    }
+    weak var view: MainViewController?
     
     // MARK: - Methods
     
