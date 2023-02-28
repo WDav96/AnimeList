@@ -45,7 +45,6 @@ class MainViewController: UIViewController {
         getBestAnimes()
         getAnimeDescription()
         setupBindings()
-
     }
     
     // MARK: - Override Methods

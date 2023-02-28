@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreData
 import UIKit
 
 protocol IMainManager {
@@ -25,16 +24,18 @@ enum APIRouter {
     
     var url: String {
         switch self {
-        case .getBestAnimes:
-            return path + "top/anime"
-        case .getAnimesDescription:
-            return path + "anime"
+            case .getBestAnimes:
+                return path + "top/anime"
+            case .getAnimesDescription:
+                return path + "anime"
         }
     }
     
 }
 
 class MainManager: IMainManager {
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     func getBestAnimes(completionHandler: @escaping ((Result<AnimeData, Error>) -> Void)) {
         guard let url = URL(string: APIRouter.getBestAnimes.url) else { return }
@@ -60,51 +61,6 @@ class MainManager: IMainManager {
         }
     }
     
-    func saveAnimesData(_ animes: AnimeData) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        animes.data?.forEach { anime in
-            let animesCoreData = AnimeInfo(context: appDelegate.persistentContainer.viewContext)
-            animesCoreData.tittle = anime.title
-            animesCoreData.image = anime.images?.jpg?.image_url
-            animesCoreData.episodes = Int64(anime.episodes ?? 0)
-            animesCoreData.status = anime.status
-            animesCoreData.rating = anime.rating
-            animesCoreData.score = Double(anime.score!)
-            animesCoreData.type = anime.type
-            animesCoreData.duration = anime.duration
-            animesCoreData.synopsis = anime.synopsis
-            appDelegate.saveContext()
-            
-        }
-    }
-    
-    func getAnimes() -> [AnimeDescription] {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return []
-        }
-        var animeData: [AnimeDescription] = []
-        do {
-            let fetchRequest: NSFetchRequest<AnimeInfo> = AnimeInfo.fetchRequest()
-            let coreDataAnimes = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
-            coreDataAnimes.forEach {
-                let dataCD = AnimeDescription(images: Image(jpg: Jpg(image_url: $0.image)),
-                                              title: $0.tittle,
-                                              episodes: Int($0.episodes),
-                                              status: $0.status,
-                                              rating: $0.rating,
-                                              score: $0.score,
-                                              type: $0.type,
-                                              duration: $0.duration,
-                                              synopsis: $0.synopsis)
-                animeData.append(dataCD)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-        return animeData
-    }
 }
 
 
