@@ -25,9 +25,9 @@ Factory: Utilizado para la construcción de objetos complejos.
 
 Funcionalidades generales:
 
-La pantalla principal tiene una barra de búsqueda que al recibir datos por parte del usuario filtra el listado de los animes populares, en caso de no encontrar coincidencias mostrará un mensaje de error.
-La pantalla principal muestra dos listados de animes obtenidos de la API, los más populares y los mejor calificados.
-Cuando se selecciona un anime se direcciona al detalle de este.
-La pantalla del detalle nos mostrará el nombre, estado, categoría, imagen de portada y sinopsis del anime.
-Hay un activity indicator que se muestra cuando se está realizando una petición al servicio web y se oculta cuando la petición recibe una respuesta.
-Hay una alerta que se muestra cuando en el proceso de obtención de datos ocurre un error.
+- La pantalla principal tiene una barra de búsqueda que al recibir datos por parte del usuario filtra el listado de los animes populares, en caso de no encontrar coincidencias mostrará un mensaje de error.
+- La pantalla principal muestra dos listados de animes obtenidos de la API, los más populares y los mejor calificados.
+- Cuando se selecciona un anime se direcciona al detalle de este.
+- La pantalla del detalle nos mostrará el nombre, estado, categoría, imagen de portada y sinopsis del anime.
+- Hay un activity indicator que se muestra cuando se está realizando una petición al servicio web y se oculta cuando la petición recibe una respuesta.
+- Hay una alerta que se muestra cuando en el proceso de obtención de datos ocurre un error.
