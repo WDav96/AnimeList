@@ -35,8 +35,6 @@ enum APIRouter {
 
 class MainManager: IMainManager {
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     func getBestAnimes(completionHandler: @escaping ((Result<AnimeData, Error>) -> Void)) {
         guard let url = URL(string: APIRouter.getBestAnimes.url) else { return }
         URLSession.shared.request(url: url, expecting: AnimeData.self) { result in

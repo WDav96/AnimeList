@@ -37,7 +37,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cLQ-Gl-XZx">
-                    <rect key="frame" x="15" y="114" width="363" height="200"/>
+                    <rect key="frame" x="15" y="119" width="363" height="200"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="VSd-Vf-BjP"/>
@@ -51,7 +51,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results Found. Try rephrasing your search." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsW-YK-bIv">
-                    <rect key="frame" x="106.66666666666669" y="197.33333333333334" width="180" height="33.666666666666657"/>
+                    <rect key="frame" x="106.66666666666669" y="202.33333333333334" width="180" height="33.666666666666657"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="180" id="DJ5-5s-KSj"/>
                     </constraints>
@@ -60,19 +60,19 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discover" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYf-P4-7gf">
-                    <rect key="frame" x="20.000000000000007" y="334" width="105.66666666666669" height="28"/>
+                    <rect key="frame" x="20.000000000000007" y="339" width="105.66666666666669" height="28"/>
                     <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="25"/>
                     <color key="textColor" name="mainBlueColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorted by fan score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjS-HO-Hua">
-                    <rect key="frame" x="20" y="372" width="156.33333333333334" height="21"/>
+                    <rect key="frame" x="20" y="377" width="156.33333333333334" height="21"/>
                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
                     <color key="textColor" name="mainBlueColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="A8A-e4-AQk">
-                    <rect key="frame" x="15" y="413" width="363" height="385"/>
+                    <rect key="frame" x="15" y="418" width="363" height="380"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="QAb-zb-c5R"/>
@@ -96,7 +96,7 @@
                 <constraint firstItem="zYf-P4-7gf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="2l1-a1-HiU"/>
                 <constraint firstItem="fjS-HO-Hua" firstAttribute="leading" secondItem="zYf-P4-7gf" secondAttribute="leading" id="5SZ-cb-4xI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lEl-uV-6Bg" secondAttribute="trailing" constant="20" id="AWh-3b-TIf"/>
-                <constraint firstItem="cLQ-Gl-XZx" firstAttribute="top" secondItem="lEl-uV-6Bg" secondAttribute="bottom" id="EnL-bS-dgO"/>
+                <constraint firstItem="cLQ-Gl-XZx" firstAttribute="top" secondItem="lEl-uV-6Bg" secondAttribute="bottom" constant="5" id="EnL-bS-dgO"/>
                 <constraint firstItem="AsW-YK-bIv" firstAttribute="centerY" secondItem="cLQ-Gl-XZx" secondAttribute="centerY" id="If2-Qx-aA4"/>
                 <constraint firstItem="fjS-HO-Hua" firstAttribute="top" secondItem="zYf-P4-7gf" secondAttribute="bottom" constant="10" id="Jf4-tZ-ZL4"/>
                 <constraint firstItem="AsW-YK-bIv" firstAttribute="centerX" secondItem="cLQ-Gl-XZx" secondAttribute="centerX" id="MIQ-LO-r0i"/>
